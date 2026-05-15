@@ -1,6 +1,6 @@
 from sys import argv
 from sys.terminate import exit
-from time import perf_counter_ns
+# from time import perf_counter_ns
 from pathlib import Path
 
 from MojoSerial.bin.EventProcessor import EventProcessor
@@ -151,10 +151,10 @@ fn main() raises:
         )
 
         processor.warmUp()
-        start[i] = perf_counter_ns()
+        start[i] = 0 # perf_counter_ns()
         cpu_start[i] = PosixClockGettime[CLOCK_THREAD_CPUTIME_ID].now()
         processor.runToCompletion()
-        end[i] = perf_counter_ns()
+        end[i] = 0 # perf_counter_ns()
         cpu_end[i] = PosixClockGettime[CLOCK_THREAD_CPUTIME_ID].now()
         try:
             processor.endJob()

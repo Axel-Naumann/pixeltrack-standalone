@@ -1,4 +1,4 @@
-from time import perf_counter_ns
+# from time import perf_counter_ns
 from pathlib import Path
 
 from MojoSerial.DataFormats.FEDRawDataCollection import FEDRawDataCollection
@@ -180,7 +180,7 @@ struct Source(Defaultable, Movable, Typeable):
     @always_inline
     fn startProcessing(mut self):
         if self._runForMinutes >= 0:
-            self._startTime = perf_counter_ns()
+            self._startTime = 0 # perf_counter_ns()
 
     @always_inline
     fn processedEvents(self) -> Int32:
@@ -211,7 +211,7 @@ struct Source(Defaultable, Movable, Typeable):
                 > self._raw.__len__()
             ):
                 # this is in nanoseconds
-                var processingTime: UInt = perf_counter_ns() - self._startTime
+                var processingTime: UInt = 0 # perf_counter_ns() - self._startTime
                 if (processingTime // (6 * 10**10)) >= UInt(
                     self._runForMinutes
                 ):

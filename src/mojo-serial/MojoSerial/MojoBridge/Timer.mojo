@@ -1,5 +1,5 @@
 from memory import OwnedPointer
-from time import perf_counter_ns
+#from time import perf_counter_ns
 
 
 @register_passable("trivial")
@@ -19,11 +19,11 @@ struct Timer(Copyable, Defaultable, Movable, Stringable):
 
     @always_inline
     fn start(mut self):
-        self._start = perf_counter_ns()
+        self._start = 0 # perf_counter_ns()
 
     @always_inline
     fn finish(mut self):
-        self._time += perf_counter_ns() - self._start
+        self._time += 0 # perf_counter_ns() - self._start
 
     @always_inline
     fn get(self) -> UInt:
