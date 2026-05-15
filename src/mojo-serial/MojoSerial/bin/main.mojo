@@ -1,4 +1,4 @@
-from sys import argv
+from sys import argv, external_call
 from sys.terminate import exit
 from time import perf_counter_ns
 from pathlib import Path
@@ -34,6 +34,20 @@ Options:
     )
 
 
+@always_inline
+fn parallelism_level() -> Int:
+    """Gets the parallelism level of the Runtime.
+
+    Returns:
+        The number of worker threads available in the async runtime.
+    """
+    return Int(
+        external_call[
+            "KGEN_CompilerRT_AsyncRT_ParallelismLevel",
+            Int32,
+        ]()
+    )
+
 fn main() raises:
     var args = argv()
     var warmupEvents = 0
@@ -61,6 +75,7 @@ fn main() raises:
         elif args[i] == "--threads":
             i += 1
             threads = Int(args[i])
+            print("Mojo is capping the parallelism level at", parallelism_level())
         elif args[i] == "--data":
             i += 1
             path = Path(args[i])
